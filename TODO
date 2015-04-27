@@ -1,0 +1,79 @@
+_TODO LIST
+|
++-[ ] Proposta em PDF
+|       Criar um pdf com a especificacao do projeto e mandar para o
+|      professor por email
+|
++-[ ] Recolher imagens úteis
+|       Colocar na pasta {project}/pictures
+|
++-[ ] Criar recortes das áreas certas
+|       Nosso algoritmo será feito em várias etapas. Nas etapas iniciais,
+|      ele simplesmente será usado para encontrar uma nova imagem, menor
+|      que contenha o que é interessante. Recortar manualmente o que queremos
+|      que o algoritmo encontre em cada passo
+|
++-[ ] Criar mocks
+|       Usando os recortes, criar todo o fluxo de chamada das funções 
+|      usando mocks (que retornam o recorte direto)
+|
++-[ ] Substituir mocks
+|  |     Vulgo fazer de fato o projeto.
+|  |
+|  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
+|  |        Essa função deve receber uma matriz (a imagem) e devolver uma
+|  |       matriz (a imagem da placa recortada)
+|  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
+|  |        Essa função deve receber uma matriz (imagem da placa recortada)
+|  |       e devolver uma matriz binaria (identificacao dos numeros, a placa
+|  |       recebida em preto e branco)
+|  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
+|  |        Essa função deve receber uma matriz (imagem da placa PB) e deve
+|  |       devolver uma matriz (a imagem em PB do último caracter)
+|  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
+|           Essa função deve receber uma matriz (imagem em PB do último
+|          dígito da placa) e deve devolver um inteiro correspondente àquele
+|          dígito presente na imagem)
+|
++-[ ] Criar uma bateria de testes usando as imagens
+|  |     Fazer testes para gerar estatísticas para usarmos no relatório
+|  |
+|  +-[ ] Copiar imagens para pasta {project}/test/input
+|  |        Colocar as imagens nessa pasta, já com os nomes apropriados
+|  |       (os nomes do arquivo devem conter a resposta - o último dígito
+|  |       da placa - para servir de gabarito para a bateria de testes)
+|  |       Padrão dos nomes: im_<id>_<ultimo_digito_da_placa>.png
+|  +-[ ] Escrever os testes
+|           Os testes devem usar as imagens da pasta {project}/test/input,
+|          devem executar o algoritmo de reconhecimento e gerar um relatório
+|          em texto plano na pasta {project}/test/output, com o nome
+|          relatorio_mmdd_hhMMss (mm = mes com 2 dígitos, dd = dia com 2
+|          dígitos, hh = hora com 2 dígitos, MM = minutos com 2 dígitos e
+|          ss = segundos com 2 dígitos), contendo as informações:
+|           * dia e hora do teste
+|           * lista de IDs das imagens usadas no teste, separados por ','
+|           * quantidade total de imagens usadas no teste
+|           * quantidade de acertos e porcentagem de acertos
+|           * quantidade de erros e porcentagem de erros
+|           * lista dos IDs das imagens que geraram ERROS
+|
++-[ ] Criar relatório
+   |     Escrever o relatório contando estratégias usadas, métodos,
+   |    resultados dos experimentos
+   |
+   +-[ ] Cap 1: Introdução
+   |        Conter uma breve explicação do problema tratado (dá para pegar
+   |       da proposta)
+   +-[ ] Cap 2: Solução Proposta
+   |        Descrever por cima as etapas que seriam feitas (dá para pegar
+   |       da proposta)
+   +-[ ] Cap 3: Problemas Encontrados
+   |        Dizer os problemas encontrados que levaram a mudar a abordagem ou
+   |       o escopo do projeto
+   +-[ ] Cap 4: Solução desenvolvida
+   |        Mencionar que foi escrito em python, usando biblioteca A, B, ...
+   |       Descrever como fazemos cada passo
+   +-[ ] Cap 5: Resultados
+   |        Usar resultados dos testes, mostrar taxa de acertos, etc
+   +-[ ] Bibliografia
+            if any
