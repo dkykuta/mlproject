@@ -1,19 +1,19 @@
 _TODO LIST
 |
-+-[ ] Proposta em PDF
++-[DONE] Proposta em PDF
 |       Criar um pdf com a especificacao do projeto e mandar para o
 |      professor por email
 |
-+-[ ] Recolher imagens úteis
-|       Colocar na pasta {project}/pictures
++-[DONE] Recolher imagens úteis
+|       Colocar na pasta {project}/images
 |
-+-[ ] Criar recortes das áreas certas
++-[DONE] Criar recortes das áreas certas
 |       Nosso algoritmo será feito em várias etapas. Nas etapas iniciais,
 |      ele simplesmente será usado para encontrar uma nova imagem, menor
 |      que contenha o que é interessante. Recortar manualmente o que queremos
 |      que o algoritmo encontre em cada passo
 |
-+-[ ] Criar mocks
++-[DONE] Criar mocks
 |       Usando os recortes, criar todo o fluxo de chamada das funções 
 |      usando mocks (que retornam o recorte direto)
 |
