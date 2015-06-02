@@ -5,11 +5,20 @@ import numpy as np
 
 def np_as_image(nparray):
     x = nparray.astype('B')
+    if len(nparray.shape) == 3:
+        _, h, w = nparray.shape
+        onelayer = False
+    else:
+        h, w = nparray.shape
+        onelayer = True
     # desfaz as trocas feitas em open_image_as_np
     # os eixos estão RGB x largura x altura
     # e serao trocados para: largura x altura x RGB
-    x = numpy.swapaxes(numpy.swapaxes(x, 1, 2), 0, 2)
-    img = Image.fromstring('RGB', (w,h), x.tostring())
+    if onelayer:
+        img = Image.fromstring('L', (w,h), x.tostring())
+    else:
+        x = np.swapaxes(np.swapaxes(x, 1, 2), 0, 2)
+        img = Image.fromstring('RGB', (w,h), x.tostring())
     return img
 
 def open_image_as_np(path):
