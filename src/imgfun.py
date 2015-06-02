@@ -44,10 +44,12 @@ def choose_limiar(img):
         T = T2
     return T
 
-def autothreshold(img):
-    return threshold(img, choose_limiar(img))
+def autothreshold(img, invert=False):
+    return threshold(img, choose_limiar(img), invert)
 
-def threshold(img, limiar):
+def threshold(img, limiar, invert=False):
+    above = np.uint8(0) if invert else np.uint8(255)
+    below = np.uint8(255) if invert else np.uint8(0)
     if len(img.shape) == 3:
             _, w, h = img.shape
     else:
@@ -56,7 +58,7 @@ def threshold(img, limiar):
     for i in xrange(w):
         for j in xrange(h):
             if img[0,i,j] > limiar:
-                ret[i,j] = np.uint8(255)
+                ret[i,j] = above
             else:
-                ret[i,j] = np.uint8(0)
+                ret[i,j] = below
     return ret
