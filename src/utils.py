@@ -21,7 +21,15 @@ def np_as_image(nparray):
         img = Image.fromstring('RGB', (w,h), x.tostring())
     return img
 
-def open_image_as_np(path):
+def open_gray_image_as_np(path):
+    img = Image.open(path)
+    w, h = img.size
+    img = img.convert('L')
+    shape = (h, w)
+    ret = np.reshape(np.fromstring(img.tostring(), 'B', w*h), shape)
+    return ret
+
+def open_rgb_image_as_np(path):
     img = Image.open(path)
     w, h = img.size
     img = img.convert('RGB')

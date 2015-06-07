@@ -12,14 +12,24 @@ def save_debug_image(img, name):
     a = utils.np_as_image(img)
     a.save('../output/debug/%s.png' % name)
 
+def save_extracted_digit(img):
+    outdir = '../output/extract/'
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
+    a = utils.np_as_image(img)
+    exists = True
+    i = 1
+    while exists:
+        path = '%s/exd_%03d.png' % (outdir, i)
+        exists = os.path.exists(path)
+        i += 1
+    a.save(path)
+
 def histogram(imgin):
+    """ supoe imgin sendo uma imagem em escala de cinza """
     hist = [0] * 256
-    if len(imgin.shape) == 3:
-            _, h, w = imgin.shape
-            img = imgin[0]
-    else:
-        img = imgin
-        h, w = img.shape
+    img = imgin
+    h, w = img.shape
     for i in xrange(h):
         for j in xrange(w):
             hist[img[i,j]] += 1
@@ -50,14 +60,12 @@ def autothreshold(img, invert=False):
 def threshold(img, limiar, invert=False):
     above = np.uint8(0) if invert else np.uint8(255)
     below = np.uint8(255) if invert else np.uint8(0)
-    if len(img.shape) == 3:
-            _, w, h = img.shape
-    else:
-        w, h = img.shape
+
+    w, h = img.shape
     ret = np.zeros((w, h))
     for i in xrange(w):
         for j in xrange(h):
-            if img[0,i,j] > limiar:
+            if img[i,j] > limiar:
                 ret[i,j] = above
             else:
                 ret[i,j] = below
