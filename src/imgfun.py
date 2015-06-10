@@ -12,8 +12,7 @@ def save_debug_image(img, name):
     a = utils.np_as_image(img)
     a.save('../output/debug/%s.png' % name)
 
-def save_extracted_digit(img):
-    outdir = '../output/extract/'
+def save_extracted_digit(img, outdir='../output/extract'):
     if not os.path.exists(outdir):
         os.makedirs(outdir)
     a = utils.np_as_image(img)

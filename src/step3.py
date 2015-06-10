@@ -66,7 +66,7 @@ def put_in_a_box(digit):
     
     return cv2.resize(ret, (40,40))
 
-def extract_and_save_all_digits(former_img):
+def extract_and_save_all_digits(former_img, outdir='../digits/extracted'):
     h, w = former_img.shape
     img = np.copy(former_img)
 
@@ -80,8 +80,8 @@ def extract_and_save_all_digits(former_img):
             # i é a linha, j é a coluna
             if img[i,j] == 255:
                 min_i, max_i, min_j, max_j = bla(img, i, j)
-                if 40 < max_i - min_i < 75 and 7 < max_j - min_j < 50:
-                    imgfun.save_extracted_digit(put_in_a_box(former_img[min_i:max_i,min_j:max_j]))
+                if 40 < max_i - min_i < 75 and 6 < max_j - min_j < 50:
+                    imgfun.save_extracted_digit(put_in_a_box(former_img[min_i:max_i,min_j:max_j]), outdir)
     return None
 
 

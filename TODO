@@ -23,11 +23,11 @@ _TODO LIST
 |  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
 |  |        Essa função deve receber uma matriz (a imagem) e devolver uma
 |  |       matriz (a imagem da placa recortada)
-|  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
+|  +-[DONE] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
 |  |        Essa função deve receber uma matriz (imagem da placa recortada)
 |  |       e devolver uma matriz binaria (identificacao dos numeros, a placa
 |  |       recebida em preto e branco)
-|  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
+|  +-[DONE] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
 |  |        Essa função deve receber uma matriz (imagem da placa PB) e deve
 |  |       devolver uma matriz (a imagem em PB do último caracter)
 |  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
