@@ -15,7 +15,8 @@ def np_as_image(nparray):
     # os eixos estão RGB x largura x altura
     # e serao trocados para: largura x altura x RGB
     if onelayer:
-        img = Image.fromstring('L', (w,h), x.tostring())
+        # mesma coisa que la embaixo, sobre tostring / tobytes
+        img = Image.frombytes('L', (w,h), x.tostring())
     else:
         x = np.swapaxes(np.swapaxes(x, 1, 2), 0, 2)
         img = Image.fromstring('RGB', (w,h), x.tostring())
@@ -26,7 +27,10 @@ def open_gray_image_as_np(path):
     w, h = img.size
     img = img.convert('L')
     shape = (h, w)
-    ret = np.reshape(np.fromstring(img.tostring(), 'B', w*h), shape)
+    # era img.tostring() mas tava dando msg de deprecation, mudei
+    # para img.tobytes()
+    # tem que ficar de olho pra ver se nao deu merda
+    ret = np.reshape(np.fromstring(img.tobytes(), 'B', w*h), shape)
     return ret
 
 def open_rgb_image_as_np(path):
