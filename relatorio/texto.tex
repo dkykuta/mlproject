@@ -1,0 +1,57 @@
+\documentclass{lista}
+
+\titulo{Projeto\\Reconhecimento do último digito de placas de automóveis}
+\materia{MAC5832 - Aprendizagem Computacional:\\Modelos, Algoritmos e Aplicações}
+
+\aluno{Diogo Haruki Kykuta}{6879613}
+\aluno{Bruno Padilha}{xxxxxxx}
+
+\begin{document}
+
+\cabecalho
+
+\section{Introdução}
+bla
+
+\section{Solução Proposta}
+bla
+
+\section{Problemas Encontrados}
+bla
+
+\section{Solução desenvolvida}
+A linguagem de programação escolhida para o programa ser feito foi Python,
+pela facilidade que a linguagem proporciona em lidar com vetores, matrizes
+e também pela grande lista de bibliotecas a disposição. Dentre elas,
+algumas foram usadas em nosso programa, e estão listadas a seguir:
+
+\begin{itemize}
+	\item[numpy] Essa biblioteca permite a manipulação de vetores e matrizes
+		de forma mais fácil e intuitiva. Permitindo uma melhor leitura do
+		código, além de uma alta performance. Todas as suas operações são
+		muito otimizadas.
+
+	\item[opencv] Usamos a versão 2 do OpenCV, cuja principal característica
+		(interessante para nós) é a representação de imagens como objetos
+		do numpy. Dessa forma, temos fácil acesso aos pixels da imagem, ainda
+		podendo usar todo o ferramental dado pelo OpenCV. Essa biblioteca nos
+		permite realizar várias operações na imagem, como operações
+		morfológicas (como abertura e fechamento), limiarização,
+		redimensionamento, dentre outras. OpenCV possui funções de
+		aprendizagem computacional, mas optamos por escolher uma outra
+		biblioteca para isso.
+
+	\item[sklearn] Essa biblioteca nos coloca a disposição métodos de
+		aprendizagem computacional otimizados, e escolhemos usar 
+		\textit{Support Vector Machine (SVM)} para tratar nosso problema.
+		A implementação que nos é fornecida permite múltiplas classes, o que
+		é essencial para lidarmos com reconhecimento de dígito.
+\end{itemize}
+
+\section{Resultados}
+bla
+
+\newpage
+\section*{Bibliografia}
+
+\end{document}

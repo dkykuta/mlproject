@@ -23,14 +23,14 @@ _TODO LIST
 |  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
 |  |        Essa função deve receber uma matriz (a imagem) e devolver uma
 |  |       matriz (a imagem da placa recortada)
-|  +-[DONE] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
+|  +-[DONE] Substituir mock da função to_binary em step2.py
 |  |        Essa função deve receber uma matriz (imagem da placa recortada)
 |  |       e devolver uma matriz binaria (identificacao dos numeros, a placa
 |  |       recebida em preto e branco)
-|  +-[DONE] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
+|  +-[DONE] Substituir mock da função extract_last_digit em step3.py
 |  |        Essa função deve receber uma matriz (imagem da placa PB) e deve
 |  |       devolver uma matriz (a imagem em PB do último caracter)
-|  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
+|  +-[DONE] Substituir mock da função recognize_digit em step4.py
 |           Essa função deve receber uma matriz (imagem em PB do último
 |          dígito da placa) e deve devolver um inteiro correspondente àquele
 |          dígito presente na imagem)
@@ -68,8 +68,8 @@ _TODO LIST
    |        Descrever por cima as etapas que seriam feitas (dá para pegar
    |       da proposta)
    +-[ ] Cap 3: Problemas Encontrados
-   |        Dizer os problemas encontrados que levaram a mudar a abordagem ou
-   |       o escopo do projeto
+   |        Dizer os problemas encontrados que levaram a mudar a abordagemi
+	 |	     ou o escopo do projeto
    +-[ ] Cap 4: Solução desenvolvida
    |        Mencionar que foi escrito em python, usando biblioteca A, B, ...
    |       Descrever como fazemos cada passo
