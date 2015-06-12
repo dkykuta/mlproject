@@ -82,10 +82,12 @@ if __name__ == "__main__":
         error = float(N - acertos) / N
 
         if error < best[0]:
-            best = (error, gamma, C, pickle.dumps(classifier))
+            best = (error, gamma, C)
         print "[gamma: %5s C: %5s] %s" % (gamma, C, error)
 
     # salva o classificador escolhido como melhor
+    clf = svm.SVC(gamma = best[1], C=best[2])
+    clf.fit(fullset.data, fullset.label)
     clf_file = open(outfile, "w")
-    clf_file.write(best[-1])
+    pickle.dump(clf, clf_file)
     clf_file.close()
