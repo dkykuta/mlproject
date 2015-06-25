@@ -10,14 +10,35 @@
 
 \cabecalho
 
-\section{Introdução}
-bla
+\section{O problema}
+Na cidade de São Paulo, temos um rodízio municipal de veículos no qual
+automóveis com placas terminadas em certos dígitos não podem trafegar em
+certas regiões da cidade. Então, reconhecer o último dígito de uma
+placa de carro a partir de uma foto pode automatizar a fiscalização
+do rodízio, em busca de infratores. Isso torna este um estudo
+interessante.
 
 \section{Solução Proposta}
-bla
+Nossa proposta de solução consiste de várias partes, podendo ser
+agrupadas em dois grandes grupos:
+
+\subsection{Treinamento}
+A primeira parte da solução consiste em realizar o treinamento, para
+que consigamos criar classificadores bons e os gravamos.
+Precisamos de dois classificadores: um para extrair a placa de uma foto
+da traseira do carro e outro para reconhecer o dígito depois de extraído.
+
+\subsection{Predição}
+Usando os resultados obtidos pelos dois treinamentos mencionados acima,
+recebemos uma foto (supostamente contendo uma placa) como argumento
+e o programa reconhece qual é o último dígito. Essa
+informação está no programa na forma de um inteiro, mas por se tratar
+apenas de um protótipo para estudo, essa informação é apenas impressa
+no terminal. Mas poderia isso poderia ser usado dentro de
+outra aplicação maior.
 
 \section{Problemas Encontrados}
-bla
+A detecção de placas mostrou-se um problema...
 
 \section{Solução desenvolvida}
 A linguagem de programação escolhida para o programa ser feito foi Python,
@@ -48,8 +69,28 @@ algumas foram usadas em nosso programa, e estão listadas a seguir:
 		é essencial para lidarmos com reconhecimento de dígito.
 \end{itemize}
 
+\subsection{Descrição dos passos do programa}
+
+\subsubsection*{Passo 1: Extrair a placa}
+A partir de uma foto como entrada.... [TODO]
+
+\subsubsection*{Passo 2: Identificar regiões de interesse na placa}
+Encontrar os dígitos
+
+\subsubsection*{Passo 3: Recortar o último dígito}
+Recortar de tamanho XXX o retangulo
+
+\subsubsection*{Passo 4: Identificar o último dígito}
+Usando SVM, com um treinamento feito previamente, identificamos o último
+dígito.
+A etapa de aprendizado usa um kernel RBF (\textit{Radial Basis Function}),
+com parâmetros $C$ e $\gamma$ escolhidos por um passo de validação
+cruzada (\textit{cross-validation}).
+
 \section{Resultados}
-bla
+[TODO: Mostrar 5-10 imagens de placas e o que o algoritmo retornou.
+Delas, 1 placa vermelha e 1-2 placas detectadas errado por classificador
+ruim e 1 placa detectada errada do fusquinha (6 antigo mais arrendondado).]
 
 \newpage
 \section*{Bibliografia}
