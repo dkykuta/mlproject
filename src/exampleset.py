@@ -50,6 +50,6 @@ class ExampleSet:
 
             if error < best[0]:
                 best = (error, gamma, C, kernel)
-            print "[kernel: %s gamma: %5s C: %5s] %s" % (kernel, gamma, C, error)
+            print "[kernel: %10s [gamma %6s, C %6s]] error: %s" % (kernel, gamma, C, error)
 
         return best
