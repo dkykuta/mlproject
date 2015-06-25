@@ -23,13 +23,14 @@ def classify(fpath):
     img = cv2.imread(fpath)
 
     plate = extract_plate(img)
-    imgfun.save_debug_image(plate, 'plate')
+
+    if plate == None:
+        print 'placa nao encontrada nessa foto'
+        return
 
     binary_plate = to_binary(plate)
-    imgfun.save_debug_image(binary_plate, 'Bplate')
 
     last_digit_img = extract_last_digit(binary_plate)
-    imgfun.save_debug_image(last_digit_img, 'lastdigit')
 
     digit = recognize_digit(last_digit_img)
 
@@ -40,7 +41,7 @@ if __name__ == "__main__":
     import sys
     print len(sys.argv), sys.argv
     if len(sys.argv) < 2:
-        print "What do you want?\nUsage: ..."
+        print "What do you want?\nUsage: %s <-td, -tp, path>" % sys.argv[1]
         sys.exit(0)
     else:
         for arg in sys.argv[1:]:
@@ -55,4 +56,4 @@ if __name__ == "__main__":
 
     print "I think you want to recognize the last digit from the plate in this picture '%s', am I correct? [Y/n]" % sys.argv[1]
     classify("../images/img_002.jpg")
-    classify("../images/img_003.jpg")
+    classify("../images/img_004.jpg")
