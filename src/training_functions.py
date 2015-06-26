@@ -23,6 +23,7 @@ def make_features_plate_training(img):
     img = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=-1)
     img = np.absolute(img)
     img = np.uint8(img)
+    print img.shape
     img = cv2.resize(img, (300, 100), interpolation = cv2.INTER_CUBIC)
     img = cv2.equalizeHist(img)
         #show_cv2(img,'')

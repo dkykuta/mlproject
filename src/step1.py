@@ -7,18 +7,8 @@ import os
 import pickle
 import numpy as np
 from sklearn import svm
+from operator import itemgetter
 from matplotlib import pyplot as plt
-
-def show_plt(rgb_img):
-    plt.imshow(rgb_img)
-    plt.xticks([]), plt.yticks([]) 
-    plt.show()
-
-def show_cv2(bgr_img, name='img'):
-    cv2.namedWindow(name, cv2.WINDOW_NORMAL)
-    cv2.imshow(name,bgr_img) 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
 
 def classify(img, clf):
     img = cv2.resize(img, (300, 100), interpolation = cv2.INTER_CUBIC)
@@ -50,24 +40,18 @@ def extract_plate(bgr_img):
     #threshold da imagem com o operador de Sobel utilizando o algoritmo de Otsu
     ret, thresh = cv2.threshold(sobelx_8u,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
     
-    show_cv2(thresh, 'Sobel x filter')
+    # show_cv2(thresh, 'Sobel x filter')
     #cv2.imwrite('thresh.jpg', thresh)
     
     #faz um fechamento (dilatacao seguida de erosao ) para unir os elementos da placa
-    closing_kernel =  cv2.getStructuringElement(cv2.MORPH_RECT,(23,4))
+    closing_kernel =  cv2.getStructuringElement(cv2.MORPH_RECT,(25, 4))
     closing_img = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, closing_kernel)
     
-    show_cv2(closing_img, 'closing')
-    #cv2.imwrite('c.jpg', closing_img)
-    
     #encontra os contornos dos elementos brancos da imagem
-    img = closing_img
-    contours, _ = cv2.findContours(img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(closing_img,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
     
     #descarta os contornos muito pequenos
-    cnt = [c for c in contours if 20000 <= cv2.contourArea(c) < 70000]
-    
-    #desenha os retangulos retos que cercam os contornos encontrados e salva as subimagens
+    cnt = [c for c in contours if 9000 <= cv2.contourArea(c) < 25000]
 
     plates_trained_classifier = '../learned/plates-train'
     if not os.path.exists(plates_trained_classifier):
@@ -75,8 +59,10 @@ def extract_plate(bgr_img):
     clf = pickle.load(open(plates_trained_classifier))
 
     plates = []
+
     for c in cnt:
         x,y,w,h = cv2.boundingRect(c)
+        # cv2.rectangle(blabla,(x,y),(x+w,y+h),(255,0,255),5)
         ratio = w/float(h)
         #print ratio
         if 2.5 <= ratio <= 5.0:
@@ -86,30 +72,10 @@ def extract_plate(bgr_img):
                 crop = cv2.getRectSubPix(bgr_img, (w, h), (x+w/2.0, y+h/2.0))
                 cr = crop.shape[1] / float(crop.shape[0])
                 crop =cv2.resize(crop, (int(100*cr), 100), interpolation = cv2.INTER_CUBIC)
-                plates.append(crop)
+                plates.append((x, crop)) # vamos usar o x depois para ordenar a lista de placas
             else:
                 cv2.rectangle(bgr_img,(x,y),(x+w,y+h),(0,25,251),2)
-    
-    #desenha os retangulos rotacionados que cercam os contornos encontrados
-    #for c in cnt:
-    #    rect = cv2.minAreaRect(c)
-    #    _,_,angle = rect
-    #    
-    #    if(angle >= -90.0 and angle <= -80.0) or (angle >= -10.0 and angle <= -0.0):
-    #        box = cv2.cv.BoxPoints(rect)
-    #        box = np.int0(box)
-    #        #print box
-    #        #print rect
-    #        xy = [list(p) for p in zip(*box)]
-    #        w = max(xy[0]) - min(xy[0])
-    #        h = max(xy[1]) - min(xy[1])
-    #        ratio = w/float(h)
-    #        if 2.5 <= ratio <= 3.5:
-    #            #print ratio
-    #            cv2.drawContours(bgr_img, [box], 0, (255,0,255),4)
-        
-    show_cv2(bgr_img, 'detected regions')
-    #cv2.imwrite('possible.jpg', bgr_img)
-    for i in plates:
-        show_cv2(i, 'detected plates')
-        return np.uint8(cv2.cvtColor(i, cv2.COLOR_BGR2GRAY))
+
+    # ordena a lista de placas da esquerda para a direita
+    plates = [p for x, p in sorted(plates, key=itemgetter(0))]
+    return [np.uint8(cv2.cvtColor(plate, cv2.COLOR_BGR2GRAY)) for plate in plates]
