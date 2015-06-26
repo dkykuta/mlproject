@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import utils
 import operator
-import imgfun
 import cv2
 import numpy as np
 
@@ -22,7 +20,7 @@ def extract_last_digit(former_img):
             # i é a linha, j é a coluna
             if img[i,j] == 255:
                 min_i, max_i, min_j, max_j = bla(img, i, j)
-                if 40 < max_i - min_i < 75 and 6 < max_j - min_j < 50:
+                if 0.35*h <= max_i - min_i <= 0.9 * h and 0.06 * h <= max_j - min_j <= 0.5 * h:
                     return put_in_a_box(former_img[min_i:max_i,min_j:max_j])
     return None
 
@@ -80,7 +78,7 @@ def extract_and_save_all_digits(former_img, outdir='../digits/extracted'):
             # i é a linha, j é a coluna
             if img[i,j] == 255:
                 min_i, max_i, min_j, max_j = bla(img, i, j)
-                if 40 < max_i - min_i < 75 and 6 < max_j - min_j < 50:
+                if 0.4*h < max_i - min_i < 0.75 * h and 0.06 * h < max_j - min_j < 0.5 * h:
                     imgfun.save_extracted_digit(put_in_a_box(former_img[min_i:max_i,min_j:max_j]), outdir)
     return None
 

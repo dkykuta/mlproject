@@ -9,8 +9,6 @@ import shutil
 import numpy as np
 from sklearn import svm
 
-import utils
-import imgfun
 from step1 import extract_plate
 from step2 import to_binary
 from step3 import extract_last_digit
@@ -23,7 +21,6 @@ def make_features_plate_training(img):
     img = cv2.Sobel(img,cv2.CV_64F,1,0,ksize=-1)
     img = np.absolute(img)
     img = np.uint8(img)
-    print img.shape
     img = cv2.resize(img, (300, 100), interpolation = cv2.INTER_CUBIC)
     img = cv2.equalizeHist(img)
         #show_cv2(img,'')
@@ -54,7 +51,7 @@ def train_plates():
     fullset.shuffle()
     # crossvalidation
     error, gamma, C, kernel = fullset.crossvalidation(10)
-    print "Parameters choosed: (kernel = %s, gamma = %s, C = %s)" % (kernel, gamma, C)
+    print "Parametros escolhidos: (kernel = %s, gamma = %s, C = %s)" % (kernel, gamma, C)
 
     # salva o classificador escolhido como melhor
     clf = svm.SVC(kernel = kernel, gamma = gamma, C=C)
@@ -64,7 +61,7 @@ def train_plates():
     clf_file.close()
 
 def train_digits():
-    digitsdir = '../digits'
+    digitsdir = '../training/digits'
     outdir = '../learned'
     outfile = '%s/digits-train' % outdir
 
@@ -80,14 +77,15 @@ def train_digits():
         currdir = os.path.join(digitsdir, "%d" % d)
         files = os.listdir(currdir)
         for f in files:
-            img = utils.open_gray_image_as_np(os.path.join(currdir, f))
+            # img = utils.open_gray_image_as_np(os.path.join(currdir, f))
+            img = np.uint8(cv2.imread(os.path.join(currdir, f), cv2.IMREAD_GRAYSCALE))
             fullset.add_info(make_features_array(img), "%d" % d)
 
     # essa porcaria ta muito concentrado
     fullset.shuffle()
     # crossvalidation
     error, gamma, C, kernel = fullset.crossvalidation(10)
-    print "Parameters choosed: (kernel = %s, gamma = %s, C = %s)" % (kernel, gamma, C)
+    print "Parametros escolhidos: (kernel = %s, gamma = %s, C = %s)" % (kernel, gamma, C)
 
     # salva o classificador escolhido como melhor
     clf = svm.SVC(kernel = kernel, gamma = gamma, C=C)

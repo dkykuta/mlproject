@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import utils
 import sys
 import cv2
 import os
