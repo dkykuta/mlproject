@@ -59,6 +59,7 @@ def train_plates():
     clf_file = open(outfile, "w")
     pickle.dump(clf, clf_file)
     clf_file.close()
+    print clf.n_support_
 
 def train_digits():
     digitsdir = '../training/digits'
@@ -93,3 +94,4 @@ def train_digits():
     clf_file = open(outfile, "w")
     pickle.dump(clf, clf_file)
     clf_file.close()
+    print clf.n_support_

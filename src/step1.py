@@ -9,6 +9,9 @@ from sklearn import svm
 from operator import itemgetter
 from matplotlib import pyplot as plt
 
+
+plates_trained_classifier = '../learned/plates-train'
+
 def cv2_show(img, name='img'):
     cv2.namedWindow(name, cv2.WINDOW_NORMAL)
     cv2.imshow(name, img)
@@ -59,7 +62,6 @@ def extract_plate(bgr_img, fpath = '_'):
     #descarta os contornos muito pequenos
     cnt = [c for c in contours if 9000 <= cv2.contourArea(c) < 25000]
 
-    plates_trained_classifier = '../learned/plates-train'
     if not os.path.exists(plates_trained_classifier):
         return "<nao foi treinado ainda>"
     clf = pickle.load(open(plates_trained_classifier))
@@ -83,9 +85,6 @@ def extract_plate(bgr_img, fpath = '_'):
             else:
                 cv2.rectangle(bgr_img,(x,y),(x+w,y+h),(0,25,251),2)
 
-
-    s = fpath.split('/')[-1].split('.')[0]
-    cv2.imwrite('../relatorio/closing_regioes_%s.png' % (s), blabla)
 
     # ordena a lista de placas da esquerda para a direita
     plates = [p for x, p in sorted(plates, key=itemgetter(0))]

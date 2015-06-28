@@ -16,6 +16,7 @@ from step4 import make_features_array, recognize_digit
 from exampleset import ExampleSet
 
 from training_functions import train_plates, train_digits
+from testing_functions import test_plates, test_digits
 
 def cv2_show(img, name='img'):
     cv2.namedWindow(name, cv2.WINDOW_NORMAL)
@@ -66,6 +67,14 @@ if __name__ == "__main__":
                 print "Training plates (step 1)"
                 train_plates()
                 sys.exit(0)
+            elif arg == '-testd':
+                print "Testing digits (step 4)"
+                test_digits()
+                sys.exit(0)
+            elif arg == '-testp':
+                print "Testing plates (step 1)"
+                test_plates()
+                sys.exit(0)
 
     print "Eu acho que voce quer reconhecer o ultimo digito da placa na foto '%s', estou certo? [S/n]" % sys.argv[1]
 #    classify("../images/img_001.jpg")
@@ -75,7 +84,8 @@ if __name__ == "__main__":
 #    classify("../images/img_005.jpg")
 #    classify("../images/img_006.jpg")
 #    classify("../images/img_007.jpg")
-    l = os.listdir('../images/fotos_mark')
-#    for f in l:
-#        classify(os.path.join('../images/fotos_mark', f))
-    classify('../images/fotos_mark/mark2.jpg')
+    d = '../images/fotos_mark'
+    l = os.listdir(d)
+    for f in l:
+        classify(os.path.join(d, f))
+#    classify('../images/fotos_mark/mark2.jpg')

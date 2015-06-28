@@ -17,10 +17,10 @@ _TODO LIST
 |       Usando os recortes, criar todo o fluxo de chamada das funções 
 |      usando mocks (que retornam o recorte direto)
 |
-+-[ ] Substituir mocks
++-[DONE] Substituir mocks
 |  |     Vulgo fazer de fato o projeto.
 |  |
-|  +-[ ] Substituir mock da função <nome_da_funcao> em <nome_arquivo>
+|  +-[DONE] Substituir mock da função extract_plate em step1.py
 |  |        Essa função deve receber uma matriz (a imagem) e devolver uma
 |  |       matriz (a imagem da placa recortada)
 |  +-[DONE] Substituir mock da função to_binary em step2.py
@@ -38,7 +38,7 @@ _TODO LIST
 +-[ ] Criar uma bateria de testes usando as imagens
 |  |     Fazer testes para gerar estatísticas para usarmos no relatório
 |  |
-|  +-[ ] Copiar imagens para pasta {project}/test/input
+|  +-[ ] Copiar imagens para pasta {project}/testing/
 |  |        Colocar as imagens nessa pasta, já com os nomes apropriados
 |  |       (os nomes do arquivo devem conter a resposta - o último dígito
 |  |       da placa - para servir de gabarito para a bateria de testes)

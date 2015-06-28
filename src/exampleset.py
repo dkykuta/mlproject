@@ -30,7 +30,7 @@ class ExampleSet:
 
         best = (2, -1, -1, "rbf")
         # encontra o melhor conjunto de parametros
-        for kernel, gamma, C in [(k, g, c) for k in ["linear", "rbf"] for g in [0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001, 0.000001] for c in [1., 10., 100., 1000.]]:
+        for kernel, gamma, C in [(k, g, c) for k in ["linear", "rbf"] for g in [0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001] for c in [1., 10., 100., 1000.]]:
             acertos = 0
             for i in xrange(fold+1):
                 inf, sup = i * step, min((i+1) * step, N)
