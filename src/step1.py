@@ -9,6 +9,12 @@ from sklearn import svm
 from operator import itemgetter
 from matplotlib import pyplot as plt
 
+def cv2_show(img, name='img'):
+    cv2.namedWindow(name, cv2.WINDOW_NORMAL)
+    cv2.imshow(name, img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
 def classify(img, clf):
     img = cv2.resize(img, (300, 100), interpolation = cv2.INTER_CUBIC)
     img = cv2.equalizeHist(img)
@@ -17,9 +23,10 @@ def classify(img, clf):
     
     return int(clf.predict(img)[0])
 
-def extract_plate(bgr_img):
+def extract_plate(bgr_img, fpath = '_'):
     b,g,r = cv2.split(bgr_img)
     rgb_img = cv2.merge([r,g,b])
+
     
     #conversao da imagem em tons de cinza
     gray = cv2.cvtColor(bgr_img,cv2.COLOR_BGR2GRAY)
@@ -45,7 +52,7 @@ def extract_plate(bgr_img):
     #faz um fechamento (dilatacao seguida de erosao ) para unir os elementos da placa
     closing_kernel =  cv2.getStructuringElement(cv2.MORPH_RECT,(25, 4))
     closing_img = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, closing_kernel)
-    
+
     #encontra os contornos dos elementos brancos da imagem
     contours, _ = cv2.findContours(closing_img,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
     
@@ -61,11 +68,12 @@ def extract_plate(bgr_img):
 
     for c in cnt:
         x,y,w,h = cv2.boundingRect(c)
-        # cv2.rectangle(blabla,(x,y),(x+w,y+h),(255,0,255),5)
+#        cv2.rectangle(blabla,(x,y),(x+w,y+h),(255,0,255),5)
         ratio = w/float(h)
         #print ratio
         if 2.5 <= ratio <= 5.0:
             crop = cv2.getRectSubPix(sobelx_8u, (w, h), (x+w/2.0, y+h/2.0))
+
             if classify(crop,clf) == 1:
                 cv2.rectangle(bgr_img,(x,y),(x+w,y+h),(0,255,0),2)
                 crop = cv2.getRectSubPix(bgr_img, (w, h), (x+w/2.0, y+h/2.0))
@@ -74,6 +82,10 @@ def extract_plate(bgr_img):
                 plates.append((x, crop)) # vamos usar o x depois para ordenar a lista de placas
             else:
                 cv2.rectangle(bgr_img,(x,y),(x+w,y+h),(0,25,251),2)
+
+
+    s = fpath.split('/')[-1].split('.')[0]
+    cv2.imwrite('../relatorio/closing_regioes_%s.png' % (s), blabla)
 
     # ordena a lista de placas da esquerda para a direita
     plates = [p for x, p in sorted(plates, key=itemgetter(0))]

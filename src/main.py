@@ -26,7 +26,7 @@ def cv2_show(img, name='img'):
 def classify(fpath):
     img = cv2.imread(fpath)
 
-    plates = extract_plate(img)
+    plates = extract_plate(img, fpath)
 
     if not plates:
         print '[%s] placa nao encontrada nessa foto' % (fpath)
@@ -76,5 +76,6 @@ if __name__ == "__main__":
 #    classify("../images/img_006.jpg")
 #    classify("../images/img_007.jpg")
     l = os.listdir('../images/fotos_mark')
-    for f in l:
-        classify(os.path.join('../images/fotos_mark', f))
+#    for f in l:
+#        classify(os.path.join('../images/fotos_mark', f))
+    classify('../images/fotos_mark/mark2.jpg')
